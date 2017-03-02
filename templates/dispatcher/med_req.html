@@ -1,0 +1,44 @@
+{% extends 'dispatcher/index.html' %}
+
+
+            {% block left_top_nav %}
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="{% url 'main' %}">Клиенты </a></li>
+            <li><a href="{% url 'lab_req' %}">Лабораторные заявки <span class="sr-only">(current)</span></a></li>
+            <li><a href="{% url 'med_req' %}">Заявки мед центра<span class="sr-only">(current)</span></a></li>
+          </ul>
+            {% endblock left_top_nav %}
+
+
+        {% block main_content %}
+          <h2 class="sub-header">Заявки мед центра</h2>
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th><a href="{% url 'sort_med_req' param='client' %}">ФИО клиента</a></th>
+                  <th><a href="{% url 'sort_med_req' param='serial_number' %}">Номер заявки</a></th>
+                  <th>Категория</th>
+                  <th><a href="{% url 'sort_med_req' param='req_delivery' %}">Доставка</a></th>
+                  <th><a href="{% url 'sort_med_req' param='create_date' %}">Дата создания</a></th>
+                  <th>Дата модификации</th>
+                  <th>Дата удаления</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for rqst in med_rqsts %}
+                <tr>
+                  <td>{{ rqst.client }}</td>
+                  <td>{{ rqst.serial_number }}</td>
+                  <td>{{ rqst.category }}</td>
+                  <td>{{ rqst.req_delivery }}</td>
+                  <td>{{ rqst.create_date }}</td>
+                  <td>{{ rqst.modify_date }}</td>
+                  <td>{{ rqst.delete_date }}</td>
+                </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endblock main_content %}

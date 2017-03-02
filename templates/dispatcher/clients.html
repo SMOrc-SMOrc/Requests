@@ -1,0 +1,45 @@
+{% extends 'dispatcher/index.html' %}
+
+
+            {% block left_top_nav %}
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="{% url 'main' %}">Клиенты <span class="sr-only">(current)</span></a></li>
+            <li><a href="{% url 'lab_req' %}">Лабораторные заявки</a></li>
+            <li><a href="{% url 'med_req' %}">Заявки мед центра</a></li>
+          </ul>
+            {% endblock left_top_nav %}
+
+
+        {% block main_content %}
+          <h2 class="sub-header">Клиенты</h2>
+            <p>Сортировка:
+                <a href="{% url 'main' %}">Все</a>&nbsp;
+                <a href="{% url 'sort' param='А' %}">А</a>&nbsp;
+                <a href="{% url 'sort' param='Б' %}">Б</a>&nbsp;
+                <a href="{% url 'sort' param='В' %}">В</a>
+            </p>
+
+
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>Фамилия</th>
+                  <th>Имя</th>
+                  <th>Отчество</th>
+                  <th>Дата рождения</th>
+                </tr>
+              </thead>
+              <tbody>
+              {% for client in clients %}
+                <tr>
+                  <td>{{ client.last_name }}</td>
+                  <td>{{ client.first_name }}</td>
+                  <td>{{ client.middle_name }}</td>
+                  <td>{{ client.birthday }}</td>
+                </tr>
+               {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% endblock main_content %}
